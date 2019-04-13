@@ -16,6 +16,7 @@
 //  --------------------------------------------------------------------------------------------------------------------
 
 using System.Linq;
+using Android.Text;
 using Android.Widget;
 using CodeChallenge.Droid.Effects;
 using Xamarin.Forms;
@@ -44,6 +45,7 @@ namespace CodeChallenge.Droid.Effects
                         control.SetLines(effect.Lines);
                     }
                 }
+                control.Ellipsize = TextUtils.TruncateAt.End;
             }
         }
 

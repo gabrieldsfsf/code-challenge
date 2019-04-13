@@ -24,12 +24,16 @@ namespace CodeChallenge.Views
 {
     public partial class HomePage : ContentPage
     {
-        private HomePageViewModel homePageViewModel;
         public HomePage()
         {
             InitializeComponent();
-            this.homePageViewModel = new HomePageViewModel(new MovieService());
-            BindingContext = this.homePageViewModel;
+            BindingContext = new HomePageViewModel(new MovieService(), this);
+
+            MoviesListView.ItemTapped += async (sender, e) =>
+            {
+                var movieItemViewModel = e.Item as MovieItemViewModel;
+                await Navigation.PushAsync(new MovieDetailPage(movieItemViewModel));
+            };
         }
 
         protected async override void OnAppearing()
@@ -50,6 +54,11 @@ namespace CodeChallenge.Views
             {
                 await viewModel.OnDisappearing();
             }
+        }
+
+        public void HideLoadingIndicator()
+        {
+            LoadingIndicator.IsVisible = false;
         }
     }
 }

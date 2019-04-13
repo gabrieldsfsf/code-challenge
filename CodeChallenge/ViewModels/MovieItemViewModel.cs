@@ -26,22 +26,29 @@ namespace CodeChallenge.ViewModels
     public class MovieItemViewModel : INotifyPropertyChanged
     {
         private string posterPath;
+        private string backdropPath;
 
         public MovieItemViewModel(Movie movie)
         {
             Title = movie.Title;
             PosterPath = Utils.MovieImageUrlBuilder.BuildPosterUrl(movie.PosterPath);
+            BackdropPath = Utils.MovieImageUrlBuilder.BuildBackdropUrl(movie.BackdropPath);
             ReleaseDate = movie.ReleaseDate;
             Genres = string.Join(", ", movie.GenreIds.Select(m => App.Genres?.First(g => g.Id == m)?.Name));
+            Overview = movie.Overview;
         }
 
         public string Title { get; set; }
 
         public string PosterPath { get => this.posterPath; set => SetProperty(ref this.posterPath, value); }
 
+        public string BackdropPath { get => this.backdropPath; set => SetProperty(ref this.backdropPath, value); }
+
         public DateTimeOffset ReleaseDate { get; set; }
 
         public string Genres { get; set; }
+
+        public string Overview { get; set; }
 
         public event PropertyChangedEventHandler PropertyChanged;
 

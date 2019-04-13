@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CodeChallenge.Views.MovieDetailPage">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <Image
+                    Source="{Binding MovieBackdropPath}" 
+                    HeightRequest="220" />
+                <StackLayout Margin="20,0,20,10">
+                    <Label
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        TextColor="Black"
+                        VerticalTextAlignment="Start"
+                        Text="{Binding MovieTitle}" >
+                    </Label>
+                    <Label
+                        TextColor="Gray"
+                        Text="{Binding MovieGenres}">
+                    </Label>
+                    <Label
+                        TextColor="Gray"
+                        Text="{Binding MovieReleaseDate}">
+                    </Label>
+                    <Label
+                        TextColor="Black"
+                        Text="{Binding MovieOverview}">
+                    </Label>
+                    <Label
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        TextColor="Black"
+                        Text="Poster">
+                    </Label>
+                    <Image
+                        Source="{Binding MoviePosterPath}" 
+                        HeightRequest="220" />
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>

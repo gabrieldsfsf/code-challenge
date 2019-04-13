@@ -17,9 +17,13 @@
     <Folder Include="Services\" />
     <Folder Include="Models\" />
     <Folder Include="Common\" />
-    <Folder Include="ViewModels\" />
     <Folder Include="Utils\" />
     <Folder Include="Effects\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Update="Views\MovieDetailPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
     <None Update="App.xaml">

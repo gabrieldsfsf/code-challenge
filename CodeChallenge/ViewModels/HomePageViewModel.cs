@@ -22,6 +22,7 @@ using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using CodeChallenge.Models;
 using CodeChallenge.Services;
+using CodeChallenge.Views;
 
 namespace CodeChallenge.ViewModels
 {
@@ -29,13 +30,15 @@ namespace CodeChallenge.ViewModels
     {
         private readonly MovieService movieService;
         private ObservableCollection<MovieItemViewModel> movies;
+        private HomePage view;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        public HomePageViewModel(MovieService movieService)
+        public HomePageViewModel(MovieService movieService, HomePage view)
         {
             this.movieService = movieService;
             this.movies = new ObservableCollection<MovieItemViewModel>();
+            this.view = view;
         }
 
         public ObservableCollection<MovieItemViewModel> Movies
@@ -47,6 +50,7 @@ namespace CodeChallenge.ViewModels
         public async Task OnAppearing()
         {
             UpcomingMoviesResponse upcomingMoviesResponse = await this.movieService.UpcomingMovies(1);
+            view.HideLoadingIndicator();
             foreach (var movie in upcomingMoviesResponse.Results)
             {
                 Movies.Add(ToMovieItemViewModel(movie));

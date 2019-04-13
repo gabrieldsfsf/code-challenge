@@ -6,8 +6,10 @@
     x:Class="CodeChallenge.Views.HomePage"
     Title="Code Challenge"
     Padding="{x:OnPlatform Android=16, iOS='16,20,16,16'}">
-    <StackLayout>
-        <ListView
+    <Grid>
+        <ActivityIndicator x:Name="LoadingIndicator" IsRunning="True" VerticalOptions="Center"/>
+        <StackLayout>
+            <ListView
             x:Name="MoviesListView"
             ItemsSource="{Binding Movies}"
             HasUnevenRows="true"
@@ -15,11 +17,12 @@
             VerticalScrollBarVisibility="Never"
             HorizontalScrollBarVisibility="Never"
             SeparatorVisibility="None">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <views:MovieItemView />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <views:MovieItemView />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+        </StackLayout>
+    </Grid>
 </ContentPage>
