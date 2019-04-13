@@ -23,7 +23,6 @@ namespace CodeChallenge.Views
 		{
 			InitializeComponent ();
             BindingContext = new MovieDetailPageViewModel(movieItemViewModel);
-
         }
 	}
 }

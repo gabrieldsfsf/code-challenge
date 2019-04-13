@@ -5,6 +5,7 @@
     xmlns:views="clr-namespace:CodeChallenge.Views"
     x:Class="CodeChallenge.Views.HomePage"
     Title="Code Challenge"
+    BackgroundColor="White"
     Padding="{x:OnPlatform Android='16,0,16,0', iOS='16,20,16,16'}">
     <Grid>
         <ActivityIndicator x:Name="LoadingIndicator" IsRunning="True" VerticalOptions="Center"/>

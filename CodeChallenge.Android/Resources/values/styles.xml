@@ -3,6 +3,7 @@
     <style
         name="MainTheme"
         parent="MainTheme.Base">
+      <item name="android:windowBackground">@drawable/splash_background</item>
     </style>
     <!-- Base theme applied no matter what API -->
     <style
