@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:views="clr-namespace:CodeChallenge.Views"
+    x:Class="CodeChallenge.Views.HomePage"
+    Title="Code Challenge"
+    Padding="{x:OnPlatform Android=16, iOS='16,20,16,16'}">
+    <StackLayout>
+        <ListView
+            x:Name="MoviesListView"
+            ItemsSource="{Binding Movies}"
+            HasUnevenRows="true"
+            SelectionMode="None"
+            VerticalScrollBarVisibility="Never"
+            HorizontalScrollBarVisibility="Never"
+            SeparatorVisibility="None">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <views:MovieItemView />
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</ContentPage>
