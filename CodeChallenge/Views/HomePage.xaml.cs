@@ -18,7 +18,10 @@
 using CodeChallenge.Models;
 using CodeChallenge.Services;
 using CodeChallenge.ViewModels;
+using System.Collections.Generic;
 using Xamarin.Forms;
+using System.Linq;
+using System;
 
 namespace CodeChallenge.Views
 {
@@ -29,11 +32,27 @@ namespace CodeChallenge.Views
             InitializeComponent();
             BindingContext = new HomePageViewModel(new MovieService(), this);
 
-            MoviesListView.ItemTapped += async (sender, e) =>
+            MoviesListView.ItemTapped += MoviesListView_ItemTapped;
+            MoviesListView.ItemAppearing += MoviesListView_ItemAppearing;
+        }
+
+        private async void MoviesListView_ItemTapped(object sender, ItemTappedEventArgs e)
+        {
+            var movieItemViewModel = e.Item as MovieItemViewModel;
+            await Navigation.PushAsync(new MovieDetailPage(movieItemViewModel));
+        }
+
+        private async void MoviesListView_ItemAppearing(object sender, ItemVisibilityEventArgs e)
+        {
+            var movieItemViewModel = e.Item as MovieItemViewModel;
+            if (BindingContext is HomePageViewModel viewModel)
             {
-                var movieItemViewModel = e.Item as MovieItemViewModel;
-                await Navigation.PushAsync(new MovieDetailPage(movieItemViewModel));
-            };
+                if (!viewModel.PaginationEndReached && !viewModel.IsLoadingMoreMovies && movieItemViewModel == viewModel.Movies.Last())
+                {
+                    PaginationLoadingIndicator.IsVisible = true;
+                    await viewModel.GetUpcomingMoviesPaginated();
+                }
+            }
         }
 
         protected async override void OnAppearing()
@@ -59,6 +78,11 @@ namespace CodeChallenge.Views
         public void HideLoadingIndicator()
         {
             LoadingIndicator.IsVisible = false;
+        }
+
+        public void HidePaginationLoadingIndicator()
+        {
+            PaginationLoadingIndicator.IsVisible = false;
         }
     }
 }

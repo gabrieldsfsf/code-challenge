@@ -5,7 +5,7 @@
     xmlns:views="clr-namespace:CodeChallenge.Views"
     x:Class="CodeChallenge.Views.HomePage"
     Title="Code Challenge"
-    Padding="{x:OnPlatform Android=16, iOS='16,20,16,16'}">
+    Padding="{x:OnPlatform Android='16,0,16,0', iOS='16,20,16,16'}">
     <Grid>
         <ActivityIndicator x:Name="LoadingIndicator" IsRunning="True" VerticalOptions="Center"/>
         <StackLayout>
@@ -23,6 +23,7 @@
                     </DataTemplate>
                 </ListView.ItemTemplate>
             </ListView>
+            <ActivityIndicator x:Name="PaginationLoadingIndicator" IsRunning="True" IsVisible="False"/>
         </StackLayout>
     </Grid>
 </ContentPage>

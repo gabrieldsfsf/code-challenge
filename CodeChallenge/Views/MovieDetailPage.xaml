@@ -6,6 +6,7 @@
         <ScrollView>
             <StackLayout>
                 <Image
+                    Aspect="AspectFill"
                     Source="{Binding MovieBackdropPath}" 
                     HeightRequest="220" />
                 <StackLayout Margin="20,0,20,10">
@@ -29,7 +30,6 @@
                         Text="{Binding MovieOverview}">
                     </Label>
                     <Label
-                        FontSize="Medium"
                         FontAttributes="Bold"
                         TextColor="Black"
                         Text="Poster">

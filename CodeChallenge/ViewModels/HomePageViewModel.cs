@@ -31,6 +31,7 @@ namespace CodeChallenge.ViewModels
         private readonly MovieService movieService;
         private ObservableCollection<MovieItemViewModel> movies;
         private HomePage view;
+        private int currentPage = 1;
 
         public event PropertyChangedEventHandler PropertyChanged;
 
@@ -47,17 +48,31 @@ namespace CodeChallenge.ViewModels
             set => SetProperty(ref this.movies, value);
         }
 
+        public bool PaginationEndReached { get; set; }
+
+        public bool IsLoadingMoreMovies { get; set; }
+
         public async Task OnAppearing()
         {
-            UpcomingMoviesResponse upcomingMoviesResponse = await this.movieService.UpcomingMovies(1);
+            await this.GetUpcomingMoviesPaginated();
             view.HideLoadingIndicator();
+        }
+
+        public Task OnDisappearing() => Task.CompletedTask;
+
+        public async Task GetUpcomingMoviesPaginated()
+        {
+            IsLoadingMoreMovies = true;
+            UpcomingMoviesResponse upcomingMoviesResponse = await this.movieService.UpcomingMovies(currentPage);
+            this.PaginationEndReached = upcomingMoviesResponse.Results.Count == 0;
             foreach (var movie in upcomingMoviesResponse.Results)
             {
                 Movies.Add(ToMovieItemViewModel(movie));
             }
+            currentPage++;
+            view.HidePaginationLoadingIndicator();
+            IsLoadingMoreMovies = false;
         }
-
-        public Task OnDisappearing() => Task.CompletedTask;
 
         public MovieItemViewModel ToMovieItemViewModel(Movie result) => new MovieItemViewModel(result);
 
