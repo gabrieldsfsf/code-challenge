@@ -3,7 +3,8 @@
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
     xmlns:effects="clr-namespace:CodeChallenge.Effects"
-    x:Class="CodeChallenge.Views.MovieItemView">
+    x:Class="CodeChallenge.Views.MovieItemView"
+    xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
     <Frame CornerRadius="{x:OnPlatform Android=0, iOS=3}"
            HasShadow="{x:OnPlatform Android=true, iOS=false}"
            BorderColor="{x:OnPlatform Android=Transparent, iOS=Gray}"
@@ -19,9 +20,11 @@
                 <ColumnDefinition Width="Auto" />
                 <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-            <Image
+            <ffimageloading:CachedImage
                 Grid.RowSpan="3"
                 Aspect="AspectFit"
+                ErrorPlaceholder="default_placeholder"
+                LoadingPlaceholder="default_placeholder"
                 Source="{Binding PosterPath}"/>
             <Label
                 Grid.Row="0"

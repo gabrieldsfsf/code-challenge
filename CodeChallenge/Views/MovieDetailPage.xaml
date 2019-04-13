@@ -3,14 +3,17 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="CodeChallenge.Views.MovieDetailPage"
              Title="{Binding MovieTitle}"
-             BackgroundColor="White">
+             BackgroundColor="White"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
     <ContentPage.Content>
         <ScrollView>
             <StackLayout>
-                <Image
+                <ffimageloading:CachedImage
+                    HeightRequest="220"
                     Aspect="AspectFill"
-                    Source="{Binding MovieBackdropPath}" 
-                    HeightRequest="220" />
+                    ErrorPlaceholder="default_placeholder"
+                    LoadingPlaceholder="default_placeholder"
+                    Source="{Binding MovieBackdropPath}"/>
                 <StackLayout Margin="20,0,20,10">
                     <Label
                         FontSize="Medium"
@@ -36,9 +39,11 @@
                         TextColor="Black"
                         Text="Poster">
                     </Label>
-                    <Image
-                        Source="{Binding MoviePosterPath}" 
-                        HeightRequest="220" />
+                    <ffimageloading:CachedImage
+                        HeightRequest="150"
+                        ErrorPlaceholder="default_placeholder"
+                        LoadingPlaceholder="default_placeholder"
+                        Source="{Binding MoviePosterPath}"/>
                 </StackLayout>
             </StackLayout>
         </ScrollView>
