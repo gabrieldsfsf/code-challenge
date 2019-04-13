@@ -5,9 +5,13 @@
     xmlns:views="clr-namespace:CodeChallenge.Views"
     x:Class="CodeChallenge.Views.HomePage"
     Title="Code Challenge"
-    Padding="{x:OnPlatform Android=16, iOS='16,20,16,16'}">
-    <StackLayout>
-        <ListView
+    BackgroundColor="White">
+    <Grid>
+        <ActivityIndicator x:Name="LoadingIndicator" IsRunning="True" VerticalOptions="Center"/>
+        <StackLayout>
+            <SearchBar x:Name="MoviesSearchBar" Placeholder="Search a movie..." IsVisible="False" TextChanged="OnSearchTextChanged"/>
+            <ListView
+            Margin="16,0,16,0"
             x:Name="MoviesListView"
             ItemsSource="{Binding Movies}"
             HasUnevenRows="true"
@@ -15,11 +19,13 @@
             VerticalScrollBarVisibility="Never"
             HorizontalScrollBarVisibility="Never"
             SeparatorVisibility="None">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <views:MovieItemView />
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
-    </StackLayout>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <views:MovieItemView />
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+            </ListView>
+            <ActivityIndicator x:Name="PaginationLoadingIndicator" IsRunning="True" IsVisible="False"/>
+        </StackLayout>
+    </Grid>
 </ContentPage>

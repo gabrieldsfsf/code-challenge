@@ -1,0 +1,51 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="CodeChallenge.Views.MovieDetailPage"
+             Title="{Binding MovieTitle}"
+             BackgroundColor="White"
+             xmlns:ffimageloading="clr-namespace:FFImageLoading.Forms;assembly=FFImageLoading.Forms">
+    <ContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <ffimageloading:CachedImage
+                    HeightRequest="220"
+                    Aspect="AspectFill"
+                    ErrorPlaceholder="default_placeholder"
+                    LoadingPlaceholder="default_placeholder"
+                    Source="{Binding MovieBackdropPath}"/>
+                <StackLayout Margin="20,0,20,10">
+                    <Label
+                        FontSize="Medium"
+                        FontAttributes="Bold"
+                        TextColor="Black"
+                        VerticalTextAlignment="Start"
+                        Text="{Binding MovieTitle}" >
+                    </Label>
+                    <Label
+                        TextColor="Gray"
+                        Text="{Binding MovieGenres}">
+                    </Label>
+                    <Label
+                        TextColor="Gray"
+                        Text="{Binding MovieReleaseDate}">
+                    </Label>
+                    <Label
+                        TextColor="Black"
+                        Text="{Binding MovieOverview}">
+                    </Label>
+                    <Label
+                        FontAttributes="Bold"
+                        TextColor="Black"
+                        Text="Poster">
+                    </Label>
+                    <ffimageloading:CachedImage
+                        HeightRequest="150"
+                        ErrorPlaceholder="default_placeholder"
+                        LoadingPlaceholder="default_placeholder"
+                        Source="{Binding MoviePosterPath}"/>
+                </StackLayout>
+            </StackLayout>
+        </ScrollView>
+    </ContentPage.Content>
+</ContentPage>
