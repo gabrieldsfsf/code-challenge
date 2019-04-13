@@ -75,14 +75,29 @@ namespace CodeChallenge.Views
             }
         }
 
-        public void HideLoadingIndicator()
+        public void OnMoviesLoaded()
         {
             LoadingIndicator.IsVisible = false;
+            MoviesSearchBar.IsVisible = true;
         }
 
         public void HidePaginationLoadingIndicator()
         {
             PaginationLoadingIndicator.IsVisible = false;
+        }
+
+        private void OnSearchTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (BindingContext is HomePageViewModel viewModel)
+            {
+                if (String.IsNullOrEmpty(MoviesSearchBar.Text))
+                {
+                    MoviesListView.ItemsSource = viewModel.Movies;
+                } else
+                {
+                    MoviesListView.ItemsSource = viewModel.GetMoviesBySearch(MoviesSearchBar.Text);
+                }
+            }
         }
     }
 }

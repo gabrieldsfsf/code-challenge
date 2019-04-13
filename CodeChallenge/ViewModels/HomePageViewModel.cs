@@ -18,6 +18,7 @@
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.ComponentModel;
+using System.Linq;
 using System.Runtime.CompilerServices;
 using System.Threading.Tasks;
 using CodeChallenge.Models;
@@ -55,7 +56,7 @@ namespace CodeChallenge.ViewModels
         public async Task OnAppearing()
         {
             await this.GetUpcomingMoviesPaginated();
-            view.HideLoadingIndicator();
+            view.OnMoviesLoaded();
         }
 
         public Task OnDisappearing() => Task.CompletedTask;
@@ -75,6 +76,11 @@ namespace CodeChallenge.ViewModels
         }
 
         public MovieItemViewModel ToMovieItemViewModel(Movie result) => new MovieItemViewModel(result);
+
+        public IEnumerable<MovieItemViewModel> GetMoviesBySearch(string searchText)
+        {
+            return movies.Where(movie => movie.Title.ToLower().Contains(searchText.ToLower()));
+        }
 
         private bool SetProperty<T>(ref T field, T value, [CallerMemberName] string propertyName = "")
         {
